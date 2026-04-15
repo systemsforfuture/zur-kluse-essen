@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="{{HERO_DESC}}">
+<title>Zur Kluse — Rechtsanwalt Essen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,300&family=Playfair+Display:ital,wght@0,400;0,700;0,900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy-dark:hsl(220 45% 9%);
+  --navy:hsl(220 40% 15%);
+  --navy-light:hsl(220 30% 28%);
+  --gold:hsl(42 80% 55%);
+  --gold-light:hsl(42 70% 70%);
+  --gold-dark:hsl(42 85% 38%);
+  --bg:hsl(220 20% 97%);
+  --card:hsl(0 0% 100%);
+  --fg:hsl(220 30% 14%);
+  --muted:hsl(220 10% 52%);
+  --border:hsl(220 15% 90%);
+  --glass-dark-bg:rgba(8,13,26,.7);
+  --glass-dark-border:rgba(255,255,255,.08);
+  --r:14px;--r-lg:20px;
+  --t:.35s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--fg);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* UTILS */
+.container{max-width:1200px;margin:0 auto;padding:0 32px}
+.gold-text{background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.glass-dark{background:var(--glass-dark-bg);border:1px solid var(--glass-dark-border);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:var(--r-lg)}
+.glass-card{background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:var(--r-lg)}
+.sec-label{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.sec-label::before,.sec-label::after{content:'';display:inline-block;width:30px;height:1px;background:rgba(184,138,50,.5)}
+.sec-h2{font-size:clamp(2rem,4vw,3.5rem);font-weight:900;letter-spacing:-.03em;line-height:1.08;margin-bottom:16px}
+.sec-h2.dark{color:var(--fg)}
+.sec-h2.light{color:#fff}
+.sec-sub{font-size:1rem;font-weight:300;line-height:1.75;max-width:560px}
+.sec-sub.dark{color:var(--muted)}
+.sec-sub.light{color:rgba(255,255,255,.45)}
+.sec-head-center{text-align:center;margin-bottom:64px}
+.sec-head-center .sec-sub{margin:0 auto}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy-dark);padding:14px 28px;border-radius:var(--r-lg);font-weight:700;font-size:.9rem;text-decoration:none;border:none;cursor:pointer;transition:all var(--t);letter-spacing:.01em;box-shadow:0 0 36px -8px rgba(184,138,50,.45)}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 32px rgba(184,138,50,.4)}
+.btn-outline-light{display:inline-flex;align-items:center;gap:8px;background:transparent;color:rgba(255,255,255,.82);padding:14px 28px;border-radius:var(--r-lg);font-weight:500;font-size:.9rem;text-decoration:none;border:1px solid rgba(255,255,255,.2);transition:all var(--t)}
+.btn-outline-light:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.07);transform:translateY(-1px)}
+.arrow-icon{transition:transform .3s ease}
+.btn-gold:hover .arrow-icon{transform:translateX(3px)}
+.btn-outline-light:hover .arrow-icon{transform:translateX(3px)}
+
+/* NAVBAR */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;transition:all var(--t)}
+.nav.scrolled{background:rgba(8,13,26,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--glass-dark-border);padding:13px 0;box-shadow:0 4px 24px rgba(0,0,0,.15)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:100%}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo svg{width:28px;height:28px;color:var(--gold);flex-shrink:0}
+.nav-brand-name{font-weight:800;font-size:1rem;color:#fff;letter-spacing:.02em;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.1}
+.nav-brand-sub{font-size:.65rem;color:var(--gold-light);letter-spacing:.25em;text-transform:uppercase;display:block;font-weight:500}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.65);text-decoration:none;font-size:.82rem;font-weight:500;padding:8px 14px;border-radius:10px;transition:all var(--t);letter-spacing:.02em}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav-portal{background:var(--gold)!important;color:var(--navy-dark)!important;font-weight:700!important;font-size:.78rem!important;padding:8px 16px!important;border-radius:10px!important;letter-spacing:.04em!important}
+.nav-portal:hover{background:var(--gold-light)!important;color:var(--navy-dark)!important}
+.nav-toggle{display:none;background:none;border:none;color:#fff;cursor:pointer;padding:8px;border-radius:10px;transition:background var(--t)}
+.nav-toggle:hover{background:rgba(255,255,255,.08)}
+.mobile-menu{display:none;background:rgba(8,13,26,.96);backdrop-filter:blur(24px);border-top:1px solid var(--glass-dark-border);padding:16px 0 24px}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;color:rgba(255,255,255,.7);padding:12px 32px;text-decoration:none;font-size:.9rem;font-weight:500;transition:color var(--t)}
+.mobile-menu a:hover{color:#fff}
+.mobile-menu .nav-portal{margin:12px 32px 0;display:block;text-align:center;background:var(--gold)!important;color:var(--navy-dark)!important;border-radius:12px!important;padding:12px!important}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--navy-dark);position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-orb1{position:absolute;width:600px;height:600px;border-radius:50%;background:rgba(184,138,50,.06);filter:blur(150px);top:10%;left:-10%;animation:float 7s ease-in-out infinite}
+.hero-orb2{position:absolute;width:500px;height:500px;border-radius:50%;background:rgba(184,138,50,.04);filter:blur(120px);bottom:10%;right:-5%;animation:float 9s ease-in-out infinite reverse}
+.hero-dots{position:absolute;inset:0;opacity:.025;background-image:radial-gradient(rgba(184,138,50,.5) 1px,transparent 1px);background-size:32px 32px}
+.hero-content{position:relative;z-index:2;width:100%;padding:130px 0 90px}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(184,138,50,.08);border:1px solid rgba(184,138,50,.2);border-radius:100px;padding:7px 16px 7px 12px;margin-bottom:32px;opacity:0;animation:blur-in .8s .2s forwards}
+.hero-badge .stars{display:flex;gap:2px}
+.hero-badge .stars svg{width:11px;height:11px;fill:var(--gold);color:var(--gold)}
+.hero-badge span{font-size:.75rem;font-weight:600;color:rgba(184,138,50,.9);letter-spacing:.02em}
+.hero-h1{font-size:clamp(2.8rem,5.5vw,5rem);font-weight:900;letter-spacing:-.04em;line-height:1.03;color:#fff;margin-bottom:22px;opacity:0;animation:blur-in 1s .4s forwards}
+.hero-h1 .gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{font-size:1.1rem;color:rgba(255,255,255,.52);max-width:520px;line-height:1.8;margin-bottom:40px;font-weight:300;opacity:0;animation:blur-in .8s .6s forwards}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px;opacity:0;animation:blur-in .8s .8s forwards}
+.hero-micro{font-size:.72rem;color:rgba(255,255,255,.28);margin-bottom:56px;opacity:0;animation:blur-in .8s .9s forwards}
+.hero-stats{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:blur-in .8s 1s forwards}
+.stat-card{padding:18px 24px;display:flex;align-items:center;gap:14px;min-width:160px}
+.stat-icon{width:38px;height:38px;border-radius:12px;background:rgba(184,138,50,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.stat-icon svg{width:18px;height:18px;color:var(--gold)}
+.stat-n{font-size:1.6rem;font-weight:900;color:#fff;line-height:1;letter-spacing:-.02em}
+.stat-l{font-size:.65rem;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.07em;font-weight:600;margin-top:2px}
+.hero-fade{position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to top,var(--bg),transparent)}
+
+/* PAIN POINTS */
+.pain-section{background:var(--navy-dark);padding:100px 0;position:relative;overflow:hidden}
+.pain-bg1{position:absolute;width:500px;height:500px;border-radius:50%;background:rgba(220,50,50,.03);filter:blur(180px);top:0;right:0}
+.pain-bg2{position:absolute;width:350px;height:350px;border-radius:50%;background:rgba(184,138,50,.02);filter:blur(120px);bottom:0;left:0}
+.urgency-ticker{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border:1px solid rgba(220,50,50,.2);border-radius:100px;margin-bottom:52px}
+.urgency-dot{position:relative;width:9px;height:9px;border-radius:50%;background:#e74c3c;flex-shrink:0}
+.urgency-dot::before{content:'';position:absolute;inset:-3px;border-radius:50%;background:rgba(231,76,60,.4);animation:ping 1.2s ease-out infinite}
+.urgency-text{font-size:.82rem;color:rgba(255,255,255,.55)}
+.urgency-text strong{color:#fff}
+.pain-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:52px}
+.pain-card{padding:28px;transition:all var(--t)}
+.pain-card:hover{border-color:rgba(184,138,50,.2)!important}
+.pain-card-inner{display:flex;gap:18px;align-items:flex-start}
+.pain-icon-box{width:52px;height:52px;border-radius:16px;background:rgba(231,76,60,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all var(--t)}
+.pain-card:hover .pain-icon-box{background:rgba(184,138,50,.1)}
+.pain-icon-box svg{width:22px;height:22px;color:#e74c3c;transition:color var(--t)}
+.pain-card:hover .pain-icon-box svg{color:var(--gold)}
+.pain-card h3{font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px;transition:color var(--t)}
+.pain-card:hover h3{color:var(--gold)}
+.pain-card p{font-size:.83rem;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:12px}
+.pain-stat{font-size:1.4rem;font-weight:900;color:var(--gold);letter-spacing:-.02em}
+.pain-stat-lbl{font-size:.7rem;color:rgba(255,255,255,.28);margin-left:6px}
+
+/* PRACTICE AREAS */
+.areas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.area-card{background:rgba(255,255,255,.5);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;transition:all .6s ease;cursor:default;position:relative;overflow:hidden}
+.area-card::before{content:'';position:absolute;top:0;left:0;right:0;height:0;background:rgba(184,138,50,.06);transition:height .4s ease}
+.area-card:hover{border-color:rgba(184,138,50,.3);box-shadow:0 20px 50px rgba(0,0,0,.08);transform:translateY(-4px)}
+.area-card:hover::before{height:100%}
+.area-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
+.area-icon-box{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,rgba(184,138,50,.15),rgba(184,138,50,.05));display:flex;align-items:center;justify-content:center;transition:all .5s ease}
+.area-card:hover .area-icon-box{background:linear-gradient(135deg,rgba(184,138,50,.25),rgba(184,138,50,.1));transform:scale(1.08)}
+.area-icon-box svg{width:22px;height:22px;color:var(--gold)}
+.area-arrow{width:20px;height:20px;color:transparent;transition:all .3s ease}
+.area-card:hover .area-arrow{color:var(--gold);transform:translate(3px,-3px)}
+.area-card h3{font-size:1.05rem;font-weight:700;color:var(--fg);margin-bottom:8px;transition:color .3s}
+.area-card:hover h3{color:var(--gold)}
+.area-card p{font-size:.82rem;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.area-count{font-size:.72rem;color:var(--gold);font-weight:700;padding-top:14px;border-top:1px solid var(--border)}
+/* Also: plain emoji fallback for area-icon (from builder) */
+.area-icon{font-size:1.6rem;margin-bottom:12px;display:block}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.svc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:32px;transition:all var(--t);position:relative;overflow:hidden}
+.svc-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-light));transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.svc-card:hover{box-shadow:0 16px 48px rgba(0,0,0,.09);transform:translateY(-4px)}
+.svc-card:hover::after{transform:scaleX(1)}
+.svc-num{font-size:2.5rem;font-weight:900;color:rgba(184,138,50,.12);line-height:1;margin-bottom:16px;letter-spacing:-.04em}
+.svc-card h3{font-size:1.05rem;font-weight:700;color:var(--fg);margin-bottom:8px}
+.svc-card p{font-size:.83rem;color:var(--muted);line-height:1.75;margin-bottom:16px;font-weight:300}
+.svc-price{display:inline-flex;align-items:center;background:rgba(184,138,50,.08);border:1px solid rgba(184,138,50,.2);color:var(--gold-dark);font-size:.72rem;font-weight:700;letter-spacing:.05em;padding:5px 12px;border-radius:100px}
+
+/* CASE RESULTS */
+.case-section{padding:100px 0;background:var(--card);position:relative;overflow:hidden}
+.case-top-line{position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:1px;background:linear-gradient(to right,transparent,rgba(184,138,50,.2),transparent)}
+.case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:52px}
+.case-card{background:rgba(255,255,255,.5);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;transition:all .6s ease;position:relative}
+.case-card:hover{border-color:rgba(184,138,50,.3);box-shadow:0 20px 50px rgba(184,138,50,.06);transform:translateY(-3px)}
+.case-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.case-cat{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;font-weight:700;color:var(--gold);background:rgba(184,138,50,.08);border:1px solid rgba(184,138,50,.2);padding:4px 12px;border-radius:100px}
+.case-tag{font-size:.68rem;color:var(--muted);background:rgba(0,0,0,.04);padding:4px 12px;border-radius:100px}
+.case-card h3{font-size:1rem;font-weight:700;color:var(--fg);margin-bottom:8px;transition:color .3s}
+.case-card:hover h3{color:var(--gold)}
+.case-card p{font-size:.82rem;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.case-result-row{display:flex;align-items:center;gap:14px;padding-top:16px;border-top:1px solid var(--border)}
+.case-result-icon{width:38px;height:38px;border-radius:12px;background:rgba(184,138,50,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s}
+.case-card:hover .case-result-icon{transform:scale(1.1)}
+.case-result-icon svg{width:18px;height:18px;color:var(--gold)}
+.case-num{font-size:1.8rem;font-weight:900;letter-spacing:-.03em}
+.case-num-lbl{font-size:.7rem;color:var(--muted)}
+.case-aggregate{display:flex;justify-content:center;margin-bottom:52px}
+.case-agg-box{padding:20px 44px;border:1px solid rgba(184,138,50,.15);text-align:center}
+.case-agg-n{font-size:2.8rem;font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:6px}
+.case-agg-l{font-size:.75rem;color:var(--muted)}
+
+/* PROCESS */
+.process-section{padding:100px 0;background:var(--bg);position:relative;overflow:hidden}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative;margin-bottom:56px}
+.process-connector{position:absolute;top:52px;left:12%;right:12%;height:1px;background:linear-gradient(to right,transparent,rgba(184,138,50,.2),transparent)}
+.process-card{text-align:center;position:relative;padding:0 8px}
+.process-icon-wrap{position:relative;width:104px;height:104px;margin:0 auto 24px;border-radius:24px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all var(--t)}
+.process-card:hover .process-icon-wrap{border-color:rgba(184,138,50,.3);box-shadow:0 16px 42px rgba(184,138,50,.08)}
+.process-icon-wrap svg{width:28px;height:28px;color:var(--gold);transition:transform .3s}
+.process-card:hover .process-icon-wrap svg{transform:scale(1.1)}
+.process-step-badge{position:absolute;top:-10px;right:-10px;width:30px;height:30px;border-radius:10px;background:var(--gold);color:var(--navy-dark);font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(184,138,50,.3)}
+.process-card h3{font-size:.95rem;font-weight:700;color:var(--fg);margin-bottom:8px;transition:color .3s}
+.process-card:hover h3{color:var(--gold)}
+.process-card p{font-size:.8rem;color:var(--muted);line-height:1.7;max-width:220px;margin:0 auto 10px}
+.process-highlight{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);background:rgba(184,138,50,.06);border:1px solid rgba(184,138,50,.12);padding:4px 10px;border-radius:100px}
+
+/* TESTIMONIALS / REVIEWS */
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.rev-card{background:var(--glass-dark-bg);border:1px solid var(--glass-dark-border);backdrop-filter:blur(14px);border-radius:var(--r-lg);padding:28px;transition:all var(--t)}
+.rev-card:hover{border-color:rgba(184,138,50,.2)}
+.rev-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px}
+.rev-avatar{width:50px;height:50px;border-radius:14px;background:var(--navy-light);display:flex;align-items:center;justify-content:center;font-size:1.2rem;border:2px solid rgba(184,138,50,.15);flex-shrink:0;overflow:hidden}
+.rev-avatar img{width:100%;height:100%;object-fit:cover}
+.rev-name{font-size:.88rem;font-weight:600;color:#fff;display:flex;align-items:center;gap:6px}
+.rev-role{font-size:.72rem;color:rgba(255,255,255,.38);margin-top:2px}
+.rev-check{width:14px;height:14px;color:#2ecc71;flex-shrink:0}
+.rev-quote-icon{width:28px;height:28px;color:rgba(184,138,50,.15);flex-shrink:0;transition:color var(--t)}
+.rev-card:hover .rev-quote-icon{color:rgba(184,138,50,.3)}
+.rev-text{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:18px}
+.rev-footer{display:flex;align-items:center;justify-content:space-between}
+.rev-stars{display:flex;gap:2px}
+.rev-stars svg{width:13px;height:13px;fill:var(--gold);color:var(--gold)}
+.rev-case-type{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;font-weight:600;color:rgba(184,138,50,.5)}
+/* Simple Google rating fallback */
+.rev-rating-center{text-align:center;padding:40px}
+.rev-big-num{font-size:3.5rem;font-weight:900;color:#fff;letter-spacing:-.04em;line-height:1}
+.rev-stars-big{display:flex;justify-content:center;gap:4px;margin:10px 0}
+.rev-stars-big svg{width:20px;height:20px;fill:var(--gold);color:var(--gold)}
+.rev-count-lbl{font-size:.82rem;color:rgba(255,255,255,.4)}
+.rev-google-badge{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;font-size:.72rem;color:rgba(255,255,255,.3)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.about-body{font-size:.97rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:32px}
+.about-checks{display:flex;flex-direction:column;gap:14px}
+.about-check{display:flex;align-items:flex-start;gap:12px;font-size:.87rem;color:rgba(255,255,255,.75)}
+.about-check-dot{width:22px;height:22px;border-radius:50%;background:rgba(184,138,50,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all var(--t)}
+.about-check:hover .about-check-dot{background:rgba(184,138,50,.22);transform:scale(1.1)}
+.about-check-dot svg{width:13px;height:13px;color:var(--gold)}
+/* About in dark context */
+.about-section-dark{background:var(--navy-dark)}
+.about-section-dark .about-body{color:rgba(255,255,255,.55)}
+.about-section-dark .sec-h2{color:#fff}
+.about-section-dark .sec-sub{color:rgba(255,255,255,.4)}
+.about-stat-card{padding:10px;border-radius:var(--r);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);text-align:center;transition:var(--t)}
+.about-stat-card:hover{background:rgba(184,138,50,.06);border-color:rgba(184,138,50,.18)}
+.about-stat-n{font-size:1.8rem;font-weight:900;color:var(--gold);display:block;line-height:1;margin-bottom:5px;letter-spacing:-.03em}
+.about-stat-l{font-size:.62rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.07em;font-weight:600}
+.about-box{padding:40px;position:relative;overflow:hidden}
+.about-box-accent{position:absolute;top:0;right:0;width:140px;height:140px;background:rgba(184,138,50,.07);border-radius:50%;filter:blur(60px)}
+.about-main-num{font-size:4.5rem;font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:6px}
+.about-main-lbl{font-size:.7rem;text-transform:uppercase;letter-spacing:.18em;color:rgba(255,255,255,.35);margin-bottom:36px;font-weight:600}
+.about-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.about-box-shadow{position:absolute;bottom:-8px;right:-8px;inset:auto;width:calc(100%);height:calc(100%);border-radius:var(--r-lg);border:1px solid rgba(184,138,50,.08);z-index:-1}
+.about-box-shadow2{position:absolute;bottom:-16px;right:-16px;inset:auto;width:calc(100%);height:calc(100%);border-radius:var(--r-lg);border:1px solid rgba(184,138,50,.04);z-index:-2}
+
+/* TRUST SECTION */
+.trust-section{padding:100px 0;background:var(--card);position:relative;overflow:hidden}
+.trust-grid{grid-template-columns:repeat(2,1fr)!important}
+.trust-points-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.trust-point{padding:22px;border:1px solid var(--border);border-radius:var(--r-lg);background:rgba(255,255,255,.5);transition:all .6s ease}
+.trust-point:hover{border-color:rgba(184,138,50,.2);box-shadow:0 14px 40px rgba(184,138,50,.05);transform:translateY(-3px)}
+.trust-point-icon{width:44px;height:44px;border-radius:14px;background:rgba(184,138,50,.08);display:flex;align-items:center;justify-content:center;margin-bottom:14px;transition:all .3s}
+.trust-point:hover .trust-point-icon{background:rgba(184,138,50,.16);transform:scale(1.1)}
+.trust-point-icon svg{width:18px;height:18px;color:var(--gold)}
+.trust-point h4{font-size:.88rem;font-weight:700;color:var(--fg);margin-bottom:4px}
+.trust-point p{font-size:.77rem;color:var(--muted);line-height:1.5}
+
+/* CTA BANNER */
+.cta-banner{padding:96px 0;background:var(--navy-dark);position:relative;overflow:hidden}
+.cta-banner-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;border-radius:50%;background:rgba(184,138,50,.06);filter:blur(130px)}
+.cta-banner-dots{position:absolute;inset:0;opacity:.02;background-image:radial-gradient(rgba(184,138,50,.4) 1px,transparent 1px);background-size:32px 32px}
+.cta-live-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:100px;background:rgba(184,138,50,.08);border:1px solid rgba(184,138,50,.2);margin-bottom:28px}
+.cta-live-dot{position:relative;width:7px;height:7px;border-radius:50%;background:#4ade80}
+.cta-live-dot::before{content:'';position:absolute;inset:-3px;border-radius:50%;background:rgba(74,222,128,.35);animation:ping 1.5s ease-out infinite}
+.cta-banner-h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:900;color:#fff;letter-spacing:-.03em;line-height:1.1;margin-bottom:20px}
+.cta-banner-sub{font-size:1rem;color:rgba(255,255,255,.45);font-weight:300;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-banner-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:28px}
+.cta-trust-row{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
+.cta-trust-item{display:flex;align-items:center;gap:6px;font-size:.73rem;color:rgba(255,255,255,.3)}
+.cta-trust-item svg{width:13px;height:13px}
+
+/* FAQ */
+.faq-section{padding:100px 0;background:var(--bg);position:relative}
+.faq-grid{display:grid;grid-template-columns:2fr 3fr;gap:80px;align-items:start}
+.faq-list{display:flex;flex-direction:column;gap:10px}
+.faq-item{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:all .4s ease;background:transparent}
+.faq-item.open{background:var(--card);border-color:rgba(184,138,50,.2);box-shadow:0 8px 32px rgba(184,138,50,.04)}
+.faq-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 22px;background:none;border:none;cursor:pointer;text-align:left;gap:16px}
+.faq-btn-text{font-size:.9rem;font-weight:500;color:var(--fg);transition:color .3s}
+.faq-item.open .faq-btn-text{color:var(--gold)}
+.faq-chev{width:16px;height:16px;color:var(--gold);flex-shrink:0;transition:transform .3s ease}
+.faq-item.open .faq-chev{transform:rotate(180deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.faq-item.open .faq-answer{max-height:200px}
+.faq-answer-text{padding:0 22px 18px;font-size:.85rem;color:var(--muted);line-height:1.75}
+
+/* CONTACT */
+#kontakt{padding:100px 0;background:var(--navy-dark);position:relative;overflow:hidden}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start}
+.contact-checks{margin-bottom:40px}
+.contact-check-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+.contact-check-item svg{width:16px;height:16px;color:var(--gold);flex-shrink:0;margin-top:2px}
+.contact-check-item span{font-size:.84rem;color:rgba(255,255,255,.65)}
+.contact-info-item{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.contact-info-icon{width:44px;height:44px;border-radius:14px;background:rgba(184,138,50,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s}
+.contact-info-item:hover .contact-info-icon{background:rgba(184,138,50,.16);transform:scale(1.08)}
+.contact-info-icon svg{width:18px;height:18px;color:var(--gold)}
+.contact-info-text{font-size:.88rem;color:rgba(255,255,255,.75)}
+.contact-info-text a{color:inherit;text-decoration:none;transition:color .3s}
+.contact-info-text a:hover{color:var(--gold)}
+.c-glass-form{position:relative;padding:40px;box-shadow:0 30px 80px rgba(0,0,0,.08)}
+.form-urgency-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy-dark);font-size:.72rem;font-weight:700;padding:7px 16px;border-radius:100px;white-space:nowrap;box-shadow:0 6px 20px rgba(184,138,50,.35)}
+.form-urgency-dot{width:6px;height:6px;border-radius:50%;background:var(--navy-dark);position:relative}
+.form-urgency-dot::before{content:'';position:absolute;inset:-3px;border-radius:50%;background:rgba(8,13,26,.4);animation:ping 1.2s ease-out infinite}
+.f-h3{font-size:1.35rem;font-weight:800;color:var(--fg);margin-bottom:6px;margin-top:10px;letter-spacing:-.02em}
+.f-sub{font-size:.77rem;color:var(--muted);margin-bottom:24px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.f-grp{margin-bottom:12px}
+.f-grp input,.f-grp textarea,.f-grp select{width:100%;background:rgba(255,255,255,.5);border:1px solid var(--border);border-radius:12px;padding:12px 16px;font-family:'Inter',sans-serif;font-size:.87rem;color:var(--fg);transition:all var(--t);outline:none}
+.f-grp input:focus,.f-grp textarea:focus,.f-grp select:focus{border-color:rgba(184,138,50,.4);box-shadow:0 0 0 3px rgba(184,138,50,.1);background:var(--card)}
+.f-grp input::placeholder,.f-grp textarea::placeholder{color:rgba(0,0,0,.3)}
+.f-grp textarea{resize:none;min-height:90px}
+.f-submit{width:100%;background:var(--gold);color:var(--navy-dark);border:none;padding:14px 28px;border-radius:var(--r-lg);font-family:'Inter',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:all var(--t);display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 0 32px -8px rgba(184,138,50,.4)}
+.f-submit:hover{background:var(--gold-light);transform:translateY(-2px)}
+.f-trust-row{display:flex;justify-content:center;gap:16px;margin-top:14px}
+.f-trust-item{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--muted)}
+.f-trust-item svg{width:12px;height:12px}
+
+/* CONTACT (dark bg context) */
+.contact-section-dark{background:var(--navy-dark)}
+.contact-section-dark .sec-h2{color:#fff}
+.contact-section-dark .sec-sub{color:rgba(255,255,255,.42)}
+.contact-section-dark .contact-info-text{color:rgba(255,255,255,.75)}
+.contact-section-dark .f-h3{color:var(--fg)}
+
+/* FOOTER */
+footer{background:var(--navy-dark);border-top:1px solid var(--glass-dark-border);padding:80px 0 32px;position:relative;overflow:hidden}
+.foot-top-line{position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:1px;background:linear-gradient(to right,transparent,rgba(184,138,50,.3),transparent)}
+.foot-grid{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:48px;margin-bottom:52px}
+.foot-brand{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.foot-brand svg{width:26px;height:26px;color:var(--gold)}
+.foot-brand-name{font-size:1rem;font-weight:800;color:#fff;letter-spacing:.02em}
+.foot-tag{font-size:.83rem;color:rgba(255,255,255,.35);line-height:1.65;font-weight:300;max-width:260px}
+.foot-col-h{font-size:.67rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.foot-links a,.foot-links span{color:rgba(255,255,255,.37);text-decoration:none;font-size:.82rem;font-weight:300;transition:color var(--t);cursor:pointer}
+.foot-links a:hover{color:rgba(255,255,255,.8)}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot-copy{font-size:.73rem;color:rgba(255,255,255,.25);font-weight:300}
+.foot-legal{display:flex;gap:22px}
+.foot-legal a{font-size:.73rem;color:rgba(255,255,255,.28);text-decoration:none;transition:color var(--t)}
+.foot-legal a:hover{color:var(--gold)}
+
+/* STICKY CTA */
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:99;transform:translateY(100%);transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.sticky-cta.show{transform:translateY(0)}
+.sticky-cta-inner{background:rgba(8,13,26,.95);backdrop-filter:blur(24px);border-top:1px solid rgba(184,138,50,.2);padding:12px 0}
+.sticky-cta-content{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.sticky-live{display:flex;align-items:center;gap:10px}
+.sticky-live-dot{position:relative;width:8px;height:8px;border-radius:50%;background:#4ade80;flex-shrink:0}
+.sticky-live-dot::before{content:'';position:absolute;inset:-3px;border-radius:50%;background:rgba(74,222,128,.35);animation:ping 1.5s ease-out infinite}
+.sticky-live-text{font-size:.82rem;color:rgba(255,255,255,.55)}
+.sticky-live-text strong{color:#fff}
+.sticky-actions{display:flex;align-items:center;gap:10px}
+.sticky-btn-outline{display:inline-flex;align-items:center;gap:6px;background:transparent;color:rgba(255,255,255,.7);padding:8px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.2);font-size:.78rem;font-weight:500;text-decoration:none;transition:all var(--t)}
+.sticky-btn-outline:hover{border-color:rgba(255,255,255,.4);color:#fff}
+.sticky-btn-gold{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--navy-dark);padding:8px 18px;border-radius:10px;font-size:.78rem;font-weight:700;text-decoration:none;transition:all var(--t);box-shadow:0 0 22px -5px rgba(184,138,50,.4)}
+.sticky-btn-gold:hover{background:var(--gold-light)}
+.sticky-dismiss{width:28px;height:28px;border-radius:8px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;transition:all var(--t)}
+.sticky-dismiss:hover{color:rgba(255,255,255,.6);background:rgba(255,255,255,.05)}
+.sticky-dismiss svg{width:14px;height:14px}
+
+/* SCROLL REVEAL */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.rv.visible{opacity:1;transform:translateY(0)}
+.rv-d1{transition-delay:.07s}.rv-d2{transition-delay:.14s}.rv-d3{transition-delay:.21s}
+.rv-d4{transition-delay:.28s}.rv-d5{transition-delay:.35s}.rv-d6{transition-delay:.42s}
+.rv-left{opacity:0;transform:translateX(-24px);transition:opacity .6s ease,transform .6s ease}
+.rv-left.visible{opacity:1;transform:translateX(0)}
+.rv-right{opacity:0;transform:translateX(24px);transition:opacity .6s ease,transform .6s ease}
+.rv-right.visible{opacity:1;transform:translateX(0)}
+
+/* KEYFRAMES */
+@keyframes blur-in{from{opacity:0;filter:blur(10px);transform:translateY(12px)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes ping{0%{transform:scale(1);opacity:.8}80%,100%{transform:scale(2.2);opacity:0}}
+@keyframes count-spin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.pain-grid,.case-grid{grid-template-columns:1fr}.areas-grid{grid-template-columns:repeat(2,1fr)}.process-grid{grid-template-columns:repeat(2,1fr)}.process-connector{display:none}.about-grid,.contact-grid,.faq-grid,.trust-grid{grid-template-columns:1fr;gap:40px}.foot-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.hero-stats{flex-direction:column}.stat-card{min-width:unset;width:100%;max-width:280px}.areas-grid{grid-template-columns:1fr 1fr}.f-row{grid-template-columns:1fr}.cta-banner-actions{flex-direction:column;align-items:center}.sticky-live{display:none}.foot-grid{grid-template-columns:1fr}.foot-bottom{flex-direction:column;text-align:center}}
+@media(max-width:480px){.container{padding:0 20px}.pain-grid,.areas-grid,.case-grid,.process-grid,.trust-points-grid{grid-template-columns:1fr}.c-glass-form{padding:28px 20px}.hero-h1{font-size:2.4rem}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+  <div class="container nav-inner">
+    <a href="#home" class="nav-logo">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 3L4 9v8c0 5.5 5.1 10.7 12 12 6.9-1.3 12-6.5 12-12V9L16 3z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M11 16l3.5 3.5L21 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div>
+        <span class="nav-brand-name">Zur Kluse</span>
+        <span class="nav-brand-sub">Rechtsanwälte</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#rechtsgebiete">Rechtsgebiete</a></li>
+      <li><a href="#kanzlei">Über uns</a></li>
+      <li><a href="#bewertungen">Bewertungen</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="#kontakt" class="nav-portal">⚖ Mandanten-Portal</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menü">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="nav-icon-menu"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="nav-icon-close" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#rechtsgebiete" class="mobile-link">Rechtsgebiete</a>
+    <a href="#kanzlei" class="mobile-link">Über uns</a>
+    <a href="#bewertungen" class="mobile-link">Bewertungen</a>
+    <a href="#kontakt" class="mobile-link">Kontakt</a>
+    <a href="#kontakt" class="nav-portal mobile-link">⚖ Mandanten-Portal</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-orb1"></div>
+    <div class="hero-orb2"></div>
+    <div class="hero-dots"></div>
+  </div>
+  <div class="container hero-content">
+    <div style="max-width:680px">
+      <div class="hero-badge">
+        <div class="stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <span>Top bewertet · Essen</span>
+      </div>
+      <h1 class="hero-h1">Zur Kluse</h1>
+      <p class="hero-desc">{{HERO_DESC}}</p>
+      <div class="hero-actions">
+        <a href="#kontakt" class="btn-gold">Kostenlose Erstberatung <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="tel:{{PHONE_CLEAN}}" class="btn-outline-light"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.49 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6.8 6.8l1.06-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>  anrufen</a>
+      </div>
+      <p class="hero-micro">✓ Kostenlos &nbsp;·&nbsp; ✓ Unverbindlich &nbsp;·&nbsp; ✓ Antwort in 2 Stunden</p>
+      <div class="hero-stats">
+        <div class="stat-card glass-dark">
+          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div class="stat-n">100%</div><div class="stat-l">Diskretion</div></div>
+        </div>
+        <div class="stat-card glass-dark">
+          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <div><div class="stat-n" id="stat-success">1268</div><div class="stat-l">Bewertungen</div></div>
+        </div>
+        <div class="stat-card glass-dark">
+          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div><div class="stat-n" id="stat-clients">1268</div><div class="stat-l">Bewertungen</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-fade"></div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="pain-section" id="warum-jetzt">
+  <div class="pain-bg1"></div><div class="pain-bg2"></div>
+  <div class="container">
+    <div class="sec-head-center rv">
+      <div class="sec-label" style="color:rgba(220,50,50,.8)"><span style="background:rgba(220,50,50,.4)"></span>Handeln Sie jetzt<span style="background:rgba(220,50,50,.4)"></span></div>
+      <h2 class="sec-h2 light">Warten kostet Sie <span style="color:#e74c3c">Geld</span></h2>
+      <p class="sec-sub light" style="max-width:560px;margin:0 auto 32px">Die meisten Menschen verlieren ihre Ansprüche nicht vor Gericht — sondern weil sie zu spät handeln.</p>
+    </div>
+    <div style="display:flex;justify-content:center;margin-bottom:48px" class="rv rv-d1">
+      <div class="urgency-ticker glass-dark">
+        <div class="urgency-dot"></div>
+        <span class="urgency-text"><strong id="live-count">5 Anfragen</strong> in der letzten Stunde eingegangen</span>
+      </div>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card glass-dark rv rv-d2">
+        <div class="pain-card-inner">
+          <div class="pain-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <h3>Fristen verpasst?</h3>
+            <p>Jeden Tag ohne Anwalt kann Sie bares Geld kosten. Verjährungsfristen laufen — oft schneller als Sie denken.</p>
+            <span class="pain-stat">47%</span><span class="pain-stat-lbl">aller Ansprüche verjähren zu spät</span>
+          </div>
+        </div>
+      </div>
+      <div class="pain-card glass-dark rv rv-d3">
+        <div class="pain-card-inner">
+          <div class="pain-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
+          <div>
+            <h3>Unrechtmäßig gekündigt?</h3>
+            <p>Ihr Arbeitgeber rechnet damit, dass Sie nichts tun. Dabei stehen Ihnen oft 5-stellige Abfindungen zu.</p>
+            <span class="pain-stat">Ø 32.000€</span><span class="pain-stat-lbl">Abfindung bei ungerechtfertigter Kündigung</span>
+          </div>
+        </div>
+      </div>
+      <div class="pain-card glass-dark rv rv-d4">
+        <div class="pain-card-inner">
+          <div class="pain-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <div>
+            <h3>Geld verloren?</h3>
+            <p>Ob Betrug, Vertragsfallen oder Erbstreit — ohne anwaltliche Hilfe verschenken Sie Ihr Recht.</p>
+            <span class="pain-stat">2,3 Mio.€</span><span class="pain-stat-lbl">für Mandanten zurückgeholt in 2024</span>
+          </div>
+        </div>
+      </div>
+      <div class="pain-card glass-dark rv rv-d5">
+        <div class="pain-card-inner">
+          <div class="pain-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div>
+            <h3>Angeklagt oder beschuldigt?</h3>
+            <p>Jede Aussage ohne Anwalt kann gegen Sie verwendet werden. Schweigen Sie — und rufen Sie uns an.</p>
+            <span class="pain-stat">94%</span><span class="pain-stat-lbl">besserer Ausgang durch frühe Vertretung</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center" class="rv">
+      <a href="#kontakt" class="btn-gold">Jetzt kostenlos beraten lassen <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <p style="font-size:.7rem;color:rgba(255,255,255,.22);margin-top:14px">Kostenlos · Unverbindlich · Antwort innerhalb von 2 Stunden</p>
+    </div>
+  </div>
+</section>
+
+<!-- RECHTSGEBIETE -->
+<section class="section" id="rechtsgebiete" style="padding:100px 0;background:var(--bg)">
+  <div class="container">
+    <div class="sec-head-center rv">
+      <div class="sec-label">Unsere Expertise</div>
+      <h2 class="sec-h2 dark">Rechtsgebiete</h2>
+      <p class="sec-sub dark">Spezialisierte Fachanwälte für jedes Rechtsgebiet — mit nachweisbarer Erfolgsbilanz.</p>
+    </div>
+    <div class="areas-grid">{{RECHTSGEBIETE_HTML}}</div>
+  </div>
+</section>
+
+<!-- LEISTUNGEN -->
+<section class="section" id="leistungen" style="padding:100px 0;background:var(--card)">
+  <div class="container">
+    <div class="sec-head-center rv">
+      <div class="sec-label">Was wir bieten</div>
+      <h2 class="sec-h2 dark">Unsere Leistungen</h2>
+      <p class="sec-sub dark">Maßgeschneiderte rechtliche Lösungen — transparent, effizient und auf Ihren Erfolg ausgerichtet.</p>
+    </div>
+    <div class="svc-grid">{{SERVICES_HTML}}</div>
+  </div>
+</section>
+
+<!-- CASE RESULTS -->
+<section class="case-section">
+  <div class="case-top-line"></div>
+  <div class="container">
+    <div class="sec-head-center rv">
+      <div class="sec-label">Ergebnisse die sprechen</div>
+      <h2 class="sec-h2 dark">Echte <span class="gold-text">Erfolge</span> für echte Menschen</h2>
+      <p class="sec-sub dark">Wir reden nicht nur — wir liefern. Einige unserer jüngsten Fallergebnisse.</p>
+    </div>
+    <div class="case-aggregate rv rv-d1">
+      <div class="case-agg-box glass-card">
+        <div class="case-agg-n gold-text" id="case-counter">2,3 Mio. €</div>
+        <div class="case-agg-l">für Mandanten erstritten in 2024</div>
+      </div>
+    </div>
+    <div class="case-grid">
+      <div class="case-card rv rv-d2">
+        <div class="case-card-head"><span class="case-cat">Arbeitsrecht</span><span class="case-tag">Außergerichtlich · 4 Wochen</span></div>
+        <h3>Ungerechtfertigte Kündigung abgewehrt</h3>
+        <p>Marketing-Direktorin nach 12 Jahren fristlos gekündigt. Kündigung angefochten, Vergleich erzielt.</p>
+        <div class="case-result-row">
+          <div class="case-result-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <div><div class="case-num gold-text">85.000€</div><div class="case-num-lbl">Abfindung erstritten</div></div>
+        </div>
+      </div>
+      <div class="case-card rv rv-d3">
+        <div class="case-card-head"><span class="case-cat">Familienrecht</span><span class="case-tag">Mediation · 3 Monate</span></div>
+        <h3>Sorgerecht &amp; Vermögensaufteilung</h3>
+        <p>Gemeinsames Sorgerecht durchgesetzt und faire Vermögensaufteilung von über 400.000€ verhandelt.</p>
+        <div class="case-result-row">
+          <div class="case-result-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <div><div class="case-num gold-text">100%</div><div class="case-num-lbl">Sorgerecht erhalten</div></div>
+        </div>
+      </div>
+      <div class="case-card rv rv-d4">
+        <div class="case-card-head"><span class="case-cat">Unternehmensrecht</span><span class="case-tag">Verhandlung · 6 Monate</span></div>
+        <h3>Firmenübernahme erfolgreich begleitet</h3>
+        <p>Mittelständisches Unternehmen vor feindlicher Übernahme geschützt — strategische Neupositionierung verhandelt.</p>
+        <div class="case-result-row">
+          <div class="case-result-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <div><div class="case-num gold-text">2,3 Mio.€</div><div class="case-num-lbl">Unternehmenswert gesichert</div></div>
+        </div>
+      </div>
+      <div class="case-card rv rv-d5">
+        <div class="case-card-head"><span class="case-cat">Strafrecht</span><span class="case-tag">Gerichtsverfahren · 8 Monate</span></div>
+        <h3>Betrugsvorwurf entkräftet</h3>
+        <p>Geschäftsführer wegen angeblichem Betrug angeklagt. Durch lückenlose Beweisführung vollständig entlastet.</p>
+        <div class="case-result-row">
+          <div class="case-result-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <div><div class="case-num gold-text">Freispruch</div><div class="case-num-lbl">Alle Anklagepunkte fallen gelassen</div></div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center" class="rv">
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:20px"><strong style="color:var(--fg)">Jeder Fall ist einzigartig.</strong> Lassen Sie uns Ihren analysieren.</p>
+      <a href="#kontakt" class="btn-gold">Kostenlosen Fallcheck anfordern <svg class="arrow-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="container">
+    <div class="sec-head-center rv">
+      <div class="sec-label">Unser Prozess</div>
+      <h2 class="sec-h2 dark">In 4 Schritten zum <span class="gold-text">Erfolg</span></h2>
+      <p class="sec-sub dark">Transparent, effizient und auf Ihr Ziel ausgerichtet.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-connector"></div>
+      <div class="process-card rv rv-d1">
+        <div class="process-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.49 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6.8 6.8l1.06-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span class="process-step-badge">01</span>
+        </div>
+        <h3>Kostenlose Erstberatung</h3>
+        <p>In einem unverbindlichen Gespräch analysieren wir Ihre Situation und zeigen Optionen auf.</p>
+        <span class="process-highlight">Kostenlos &amp; unverbindlich</span>
+      </div>
+      <div class="process-card rv rv-d2">
+        <div class="process-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span class="process-step-badge">02</span>
+        </div>
+        <h3>Fallanalyse &amp; Strategie</h3>
+        <p>Unsere Experten prüfen Ihren Fall im Detail und entwickeln eine maßgeschneiderte Strategie.</p>
+        <span class="process-highlight">Innerhalb von 48h</span>
+      </div>
+      <div class="process-card rv rv-d3">
+        <div class="process-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="process-step-badge">03</span>
+        </div>
+        <h3>Aktive Vertretung</h3>
+        <p>Wir setzen Ihre Rechte konsequent durch — außergerichtlich oder vor Gericht.</p>
+        <span class="process-highlight">Laufende Updates</span>
+      </div>
+      <div class="process-card rv rv-d4">
+        <div class="process-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+          <span class="process-step-badge">04</span>
+        </div>
+        <h3>Erfolgreicher Abschluss</h3>
+        <p>Konsequent und persönlich — wir kämpfen für Ihr bestmögliches Ergebnis.</p>
+        <span class="process-highlight">Ihr Recht durchsetzen</span>
+      </div>
+    </div>
+    <div style="text-align:center" class="rv">
+      <a href="#kontakt" class="btn-gold">Jetzt Schritt 1 starten — kostenlos <svg class="arrow-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS / TESTIMONIALS -->
+<section style="padding:100px 0;background:var(--navy-dark);position:relative;overflow:hidden" id="bewertungen">
+  <div style="position:absolute;width:400px;height:400px;top:20%;left:0;background:rgba(184,138,50,.04);border-radius:50%;filter:blur(120px)"></div>
+  <div style="position:absolute;width:350px;height:350px;bottom:10%;right:0;background:rgba(184,138,50,.03);border-radius:50%;filter:blur(100px)"></div>
+  <div class="container">
+    <div class="sec-head-center rv">
+      <div class="sec-label">Mandantenstimmen</div>
+      <h2 class="sec-h2 light">Was unsere <span class="gold-text">Mandanten</span> sagen</h2>
+      <p class="sec-sub light">Vertrauen aufgebaut durch Ergebnisse — nicht durch Versprechen.</p>
+    </div>
+    {{REVIEWS_SECTION}}
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about-section-dark" id="kanzlei" style="padding:100px 0">
+  <div class="container">
+    <div class="about-grid">
+      <div class="rv-left">
+        <div class="sec-label">Über die Kanzlei</div>
+        <h2 class="sec-h2 light" style="margin-top:10px">Vertrauen durch <span class="gold-text">Kompetenz</span></h2>
+        <p class="about-body" style="color:rgba(255,255,255,.5);margin-top:12px">{{ABOUT_TEXT}}</p>
+        <div class="about-checks">
+          <div class="about-check"><div class="about-check-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg></div><span>Persönliche Beratung auf höchstem Niveau</span></div>
+          <div class="about-check"><div class="about-check-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg></div><span>Spezialisierung auf komplexe Rechtsfragen</span></div>
+          <div class="about-check"><div class="about-check-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg></div><span>Transparente Kostenstruktur ohne versteckte Gebühren</span></div>
+          <div class="about-check"><div class="about-check-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg></div><span>Langjährige Erfahrung in Essen und Umgebung</span></div>
+        </div>
+      </div>
+      <div class="rv-right">
+        <div class="about-box glass-dark" style="position:relative">
+          <div class="about-box-accent"></div>
+          <div style="position:relative">
+            <div class="about-main-num gold-text" id="about-years">Ihre<br>Kanzlei</div>
+            <div class="about-main-lbl">vor Ort</div>
+            <div class="about-stats-grid">
+              <div class="about-stat-card"><span class="about-stat-n">100%</span><span class="about-stat-l">Persönlich</span></div>
+              <div class="about-stat-card"><span class="about-stat-n" id="about-mandates">1268</span><span class="about-stat-l">Bewertungen</span></div>
+              <div class="about-stat-card"><span class="about-stat-n">1268</span><span class="about-stat-l">Bewertungen</span></div>
+              <div class="about-stat-card"><span class="about-stat-n">4.9★</span><span class="about-stat-l">Bewertung</span></div>
+            </div>
+          </div>
+          <div class="about-box-shadow"></div>
+          <div class="about-box-shadow2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST SECTION -->
+<section class="trust-section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:2fr 3fr;gap:80px;align-items:center" class="trust-grid">
+      <div class="rv-left">
+        <div class="sec-label">Warum wir</div>
+        <h2 class="sec-h2 dark" style="margin-top:10px">Ihr Vorteil mit <span class="gold-text">Zur Kluse</span></h2>
+        <p class="sec-sub dark" style="margin-bottom:28px">Juristische Exzellenz mit modernem Service — damit Sie sich auf das Wesentliche konzentrieren können.</p>
+        <a href="#kontakt" class="btn-gold">Jetzt beraten lassen <svg class="arrow-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="trust-points-grid rv-right">
+        <div class="trust-point"><div class="trust-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>Anwaltsgeheimnis</h4><p>Absolute Vertraulichkeit in jedem Fall</p></div>
+        <div class="trust-point"><div class="trust-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>24h Erreichbarkeit</h4><p>Notfall-Hotline für dringende Fälle</p></div>
+        <div class="trust-point"><div class="trust-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h4>Fachanwälte</h4><p>Zertifizierte Spezialisten pro Rechtsgebiet</p></div>
+        <div class="trust-point"><div class="trust-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><h4>Voller Einsatz</h4><p>Konsequente Durchsetzung Ihrer Rechte</p></div>
+        <div class="trust-point"><div class="trust-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h4>DSGVO-konform</h4><p>Höchste Datenschutzstandards</p></div>
+        <div class="trust-point"><div class="trust-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h4>Persönlich</h4><p>Fester Ansprechpartner ab Tag eins</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-banner-dots"></div><div class="cta-banner-orb"></div>
+  <div class="container" style="text-align:center;position:relative">
+    <div class="rv">
+      <div class="cta-live-badge">
+        <div class="cta-live-dot"></div>
+        <span style="font-size:.73rem;color:var(--gold);font-weight:600">Noch heute einen Termin sichern</span>
+      </div>
+      <h2 class="cta-banner-h2">Lassen Sie uns Ihr <span class="gold-text">Recht durchsetzen</span></h2>
+      <p class="cta-banner-sub">Jeder Tag ohne anwaltliche Vertretung kann Sie Geld kosten. Handeln Sie jetzt — wir sind bereit.</p>
+      <div class="cta-banner-actions">
+        <a href="#kontakt" class="btn-gold">Kostenlose Erstberatung anfordern <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="tel:{{PHONE_CLEAN}}" class="btn-outline-light"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.49 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6.8 6.8l1.06-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Sofort anrufen</a>
+      </div>
+      <div class="cta-trust-row">
+        <span class="cta-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> 100% vertraulich</span>
+        <span class="cta-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Antwort in 2h</span>
+        <span class="cta-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Keine versteckten Kosten</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="faq-grid">
+      <div class="rv-left">
+        <div class="sec-label">FAQ</div>
+        <h2 class="sec-h2 dark" style="margin-top:10px">Häufig gestellte <span class="gold-text">Fragen</span></h2>
+        <p class="sec-sub dark" style="margin-bottom:28px">Antworten auf die wichtigsten Fragen — transparent und ehrlich.</p>
+        <a href="#kontakt" class="btn-gold">Individuelle Frage stellen <svg class="arrow-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="faq-list rv-right">
+        <div class="faq-item open">
+          <button class="faq-btn"><span class="faq-btn-text">Was kostet eine Erstberatung?</span><svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p class="faq-answer-text">Die Erstberatung bei uns ist kostenlos und unverbindlich. Wir analysieren Ihren Fall und geben Ihnen eine ehrliche Einschätzung — ohne versteckte Kosten.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn"><span class="faq-btn-text">Wie schnell bekomme ich einen Termin?</span><svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p class="faq-answer-text">In dringenden Fällen können wir oft noch am selben Tag einen Termin anbieten. Reguläre Erstberatungen sind innerhalb von 48 Stunden möglich.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn"><span class="faq-btn-text">Übernimmt meine Rechtsschutzversicherung die Kosten?</span><svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p class="faq-answer-text">In den meisten Fällen ja. Wir prüfen vorab kostenlos, ob Ihre Versicherung die Kosten übernimmt und kümmern uns um die Deckungszusage.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn"><span class="faq-btn-text">Kann ich auch Online-Beratung nutzen?</span><svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p class="faq-answer-text">Selbstverständlich. Über unser digitales Mandanten-Portal können Sie Termine per Video wahrnehmen, Dokumente austauschen und den Status Ihres Falls jederzeit einsehen.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn"><span class="faq-btn-text">Wie gehen Sie an meinen Fall heran?</span><svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p class="faq-answer-text">Jeder Fall wird individuell analysiert und mit einer maßgeschneiderten Strategie bearbeitet — ob außergerichtlich oder vor Gericht. Sie erhalten von Anfang an klare Einschätzungen und ehrliche Beratung.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn"><span class="faq-btn-text">Wie funktioniert das Mandanten-Portal?</span><svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-answer"><p class="faq-answer-text">Nach Beauftragung erhalten Sie Zugang zu unserem sicheren Portal. Dort können Sie Dokumente hochladen, Nachrichten senden, Termine vereinbaren und den Fortschritt Ihres Falls verfolgen.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="kontakt" class="contact-section-dark" style="padding:100px 0;position:relative;overflow:hidden">
+  <div style="position:absolute;bottom:0;right:0;width:350px;height:350px;background:rgba(184,138,50,.03);border-radius:50%;filter:blur(90px)"></div>
+  <div class="container">
+    <div class="contact-grid">
+      <div class="rv-left">
+        <div class="sec-label">Kontakt</div>
+        <h2 class="sec-h2 light" style="margin-top:10px">Kostenlose <span class="gold-text">Erstberatung</span></h2>
+        <p class="sec-sub light" style="margin-bottom:28px">Schildern Sie uns Ihr Anliegen — wir melden uns innerhalb von 2 Stunden mit einer ersten Einschätzung.</p>
+        <div class="contact-checks">
+          <div class="contact-check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Kostenlose und unverbindliche Ersteinschätzung</span></div>
+          <div class="contact-check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Antwort innerhalb von 2 Stunden garantiert</span></div>
+          <div class="contact-check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Ihre Daten werden streng vertraulich behandelt (DSGVO)</span></div>
+          <div class="contact-check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Rechtsschutzversicherung? Wir prüfen die Deckung</span></div>
+        </div>
+        <div style="margin-top:32px">
+          <div class="contact-info-item"><div class="contact-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.49 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6.8 6.8l1.06-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><span class="contact-info-text"><a href="tel:{{PHONE_CLEAN}}"></a></span></div>
+          <div class="contact-info-item"><div class="contact-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><span class="contact-info-text">{{EMAIL_LINK}}</span></div>
+          <div class="contact-info-item"><div class="contact-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><span class="contact-info-text">{{ADDRESS}}</span></div>
+          <div class="contact-info-item"><div class="contact-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span class="contact-info-text">Mo–Fr: 09:00 – 18:00 Uhr</span></div>
+        </div>
+      </div>
+      <div class="rv-right">
+        <div class="c-glass-form glass-card" style="background:var(--card);border:1px solid var(--border)">
+          <div class="form-urgency-badge"><div class="form-urgency-dot"></div>Heute noch Plätze frei</div>
+          <div class="f-h3">Jetzt Anfrage senden</div>
+          <p class="f-sub">Alle Felder mit * sind Pflichtfelder.</p>
+          <form id="cform">
+            <div class="f-row">
+              <div class="f-grp"><input type="text" placeholder="Vorname *" required></div>
+              <div class="f-grp"><input type="text" placeholder="Nachname *" required></div>
+            </div>
+            <div class="f-grp"><input type="email" placeholder="E-Mail *" required></div>
+            <div class="f-grp"><input type="tel" placeholder="Telefon (für Rückruf)"></div>
+            <div class="f-grp">
+              <select>
+                <option value="">Rechtsgebiet auswählen</option>
+                <option>Familienrecht</option><option>Arbeitsrecht</option><option>Vertragsrecht</option>
+                <option>Erbrecht</option><option>Immobilienrecht</option><option>Strafrecht</option><option>Sonstiges</option>
+              </select>
+            </div>
+            <div class="f-grp"><textarea placeholder="Beschreiben Sie kurz Ihr Anliegen *" required></textarea></div>
+            <button type="submit" class="f-submit">
+              Kostenlose Erstberatung anfordern
+              <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </form>
+          <div class="f-trust-row">
+            <span class="f-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> SSL-verschlüsselt</span>
+            <span class="f-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 4.9/5 Bewertung</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-top-line"></div>
+  <div class="foot-inner" style="max-width:1200px;margin:0 auto;padding:0 32px">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M16 3L4 9v8c0 5.5 5.1 10.7 12 12 6.9-1.3 12-6.5 12-12V9L16 3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          <span class="foot-brand-name">Zur Kluse</span>
+        </div>
+        <p class="foot-tag">{{TAGLINE}} &mdash; Ihr Rechtsanwalt in Essen.</p>
+      </div>
+      <div>
+        <p class="foot-col-h">Rechtsgebiete</p>
+        <ul class="foot-links"><li><a href="#rechtsgebiete">Familienrecht</a></li><li><a href="#rechtsgebiete">Arbeitsrecht</a></li><li><a href="#rechtsgebiete">Vertragsrecht</a></li><li><a href="#rechtsgebiete">Erbrecht</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-col-h">Kanzlei</p>
+        <ul class="foot-links"><li><a href="#kanzlei">Über uns</a></li><li><a href="#leistungen">Leistungen</a></li><li><a href="#bewertungen">Bewertungen</a></li><li><a href="#kontakt">Mandanten-Portal</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-col-h">Kontakt</p>
+        <ul class="foot-links"><li><a href="tel:{{PHONE_CLEAN}}"></a></li><li>{{EMAIL_LINK}}</li><li><a href="#kontakt">Beratungsanfrage</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-copy">&copy; 2026 Zur Kluse &middot; Alle Rechte vorbehalten</p>
+      <div class="foot-legal">
+        <a href="#kontakt" >Impressum</a>
+        <a href="#kontakt" >Datenschutzerklärung</a>
+        <span style="opacity:.35;font-size:.73rem;margin-left:6px">· Demo-Website</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta" id="sticky-cta">
+  <div class="sticky-cta-inner">
+    <div class="container sticky-cta-content">
+      <div class="sticky-live">
+        <div class="sticky-live-dot"></div>
+        <span class="sticky-live-text"><strong>Jetzt verfügbar</strong> — Kostenlose Erstberatung</span>
+      </div>
+      <div class="sticky-actions">
+        <a href="tel:{{PHONE_CLEAN}}" class="sticky-btn-outline"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.49 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6.8 6.8l1.06-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Sofort anrufen</a>
+        <a href="#kontakt" class="sticky-btn-gold">Erstberatung sichern <svg class="arrow-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <button class="sticky-dismiss" id="sticky-dismiss" aria-label="Schließen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // Navbar scroll
+  var nav=document.getElementById('navbar');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40)},{passive:true});
+
+  // Mobile menu
+  var toggle=document.getElementById('nav-toggle');
+  var menu=document.getElementById('mobile-menu');
+  var iconMenu=document.getElementById('nav-icon-menu');
+  var iconClose=document.getElementById('nav-icon-close');
+  toggle.addEventListener('click',function(){
+    var open=menu.classList.toggle('open');
+    iconMenu.style.display=open?'none':'block';
+    iconClose.style.display=open?'block':'none';
+  });
+  document.querySelectorAll('.mobile-link').forEach(function(a){
+    a.addEventListener('click',function(){
+      menu.classList.remove('open');
+      iconMenu.style.display='block';
+      iconClose.style.display='none';
+    });
+  });
+
+  // Scroll reveal
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:.1,rootMargin:'0px 0px -36px 0px'});
+  document.querySelectorAll('.rv,.rv-left,.rv-right').forEach(function(el){obs.observe(el);});
+
+  // Sticky CTA
+  var stickyCta=document.getElementById('sticky-cta');
+  var dismissed=false;
+  document.getElementById('sticky-dismiss').addEventListener('click',function(){dismissed=true;stickyCta.classList.remove('show');});
+  window.addEventListener('scroll',function(){
+    if(!dismissed){stickyCta.classList.toggle('show',window.scrollY>800);}
+  },{passive:true});
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var item=btn.closest('.faq-item');
+      var isOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});
+      if(!isOpen){item.classList.add('open');}
+    });
+  });
+
+  // Live urgency ticker
+  var liveEl=document.getElementById('live-count');
+  if(liveEl){
+    var count=3+Math.floor(Math.random()*5);
+    setInterval(function(){
+      count=count>=12?3:count+Math.floor(Math.random()*2);
+      liveEl.textContent=count+' Anfragen';
+    },7000);
+  }
+
+  // Form submit
+  var f=document.getElementById('cform');
+  if(f){f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=f.querySelector('.f-submit');
+    btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Anfrage gesendet — Wir melden uns bald!';
+    btn.style.background='#2d6a4f';
+    btn.style.boxShadow='none';
+    btn.disabled=true;
+  });}
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.querySelector(a.getAttribute('href'));
+      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+})();
+</script>
+</body>
+</html>
